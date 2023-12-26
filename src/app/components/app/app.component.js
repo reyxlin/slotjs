@@ -243,7 +243,7 @@ export class App {
             this.mainElement,
             this.handleUseCoin,
             this.handleGetPrice,
-            5,
+            9,
             SYMBOLS_RANDOM,
             isFirstTime,
         );

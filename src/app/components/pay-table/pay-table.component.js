@@ -51,6 +51,7 @@ export class PayTable {
             `;
         }).join('');
 
+
         this.activeColumn = this.root.querySelector(PayTable.S_INITIALLY_ACTIVE_COLUMN);
 
         this.root.querySelector(PayTable.S_HEADER).addEventListener('click', this.handleColumnClicked.bind(this));

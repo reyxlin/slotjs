@@ -103,7 +103,8 @@ export class SlotMachine {
         this.blipFading = 1 / reelCount;
 
         const alpha = this.alpha = 360 / symbols.length;
-        const shuffledSymbols = [...symbols];
+        const SYMBOLS_SET1 = [...symbols];
+        const SYMBOLS_SET2 = ['0️⃣', '1️⃣', '0️⃣', '1️⃣', '0️⃣', '1️⃣', '0️⃣', '1️⃣', '0️⃣', '1️⃣'];
         const diameter = (2 * reelCount) + SlotMachine.UNITS_CENTER;
 
         // Sets --reelSize and --displaySize:
@@ -115,11 +116,18 @@ export class SlotMachine {
 
         const { reelsContainer, reels } = this;
 
-        for (let reelIndex = 0; reelIndex < reelCount; ++reelIndex) {
-            const reel = new SlotMachineReel(reelIndex, alpha, shuffledSymbols, diameter);
+        // for (let reelIndex = 0; reelIndex < reelCount; ++reelIndex) {
+        //     const reel = new SlotMachineReel(reelIndex, alpha, shuffledSymbols, diameter);
 
-            reelsContainer.appendChild(reel.root);
-            reels.push(reel);
+        //     reelsContainer.appendChild(reel.root);
+        //     reels.push(reel);
+        // }
+        for (let reelIndex = 0; reelIndex < reelCount; ++reelIndex) {
+            const shuffledSymbols = reelIndex % 3 === 0 ? SYMBOLS_SET2 : SYMBOLS_SET1;
+            const reel = new SlotMachineReel(reelIndex, this.alpha, shuffledSymbols, diameter);
+
+            this.reelsContainer.appendChild(reel.root);
+            this.reels.push(reel);
         }
 
         // Additional reel at the end that acts as a "cover" in case we set a background color on them and we only want
@@ -131,7 +139,7 @@ export class SlotMachine {
         this.handleUseCoin();
         this.currentCombination = [];
         this.currentReel = 0;
-        this.zoomOut();
+        // this.zoomOut();
         this.display.classList.remove(SlotMachine.C_IS_WIN, SlotMachine.C_IS_FAIL);
         this.reels.forEach((reel) => reel.reset());
         resetAnimations();
@@ -144,22 +152,26 @@ export class SlotMachine {
     }
 
     stop() {
-        const currentPrize = this.checkPrize();
+        // const currentPrize = this.checkPrize();
 
         this.currentReel = null;
-        this.zoomIn();
+        // this.zoomIn();
 
-        if (currentPrize) {
-            SMSoundService.win();
+        SMSoundService.win();
 
-            this.display.classList.add(SlotMachine.C_IS_WIN);
+        this.display.classList.add(SlotMachine.C_IS_FAIL);
 
-            this.handleGetPrice(currentPrize);
-        } else {
-            SMSoundService.unlucky();
+        // if (currentPrize) {
+        //     SMSoundService.win();
 
-            this.display.classList.add(SlotMachine.C_IS_FAIL);
-        }
+        //     this.display.classList.add(SlotMachine.C_IS_WIN);
+
+        //     this.handleGetPrice(currentPrize);
+        // } else {
+        //     SMSoundService.unlucky();
+
+        //     this.display.classList.add(SlotMachine.C_IS_FAIL);
+        // }
     }
 
     tick() {

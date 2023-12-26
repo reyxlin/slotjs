@@ -99,10 +99,18 @@
             background: rgb(127, 160, 0);
         }
 
+        // &.is-fail {
+        //     --displayShadowColor: rgba(255, 0, 0, 0.25);
+
+        //     background: rgb(2550, 0, 0);
+        // }
         &.is-fail {
             --displayShadowColor: rgba(255, 0, 0, 0.25);
 
-            background: rgb(255, 0, 0);
+            background: linear-gradient(to right, 
+            rgb(100, 100, 0) 33%, 
+            rgb(0, 100, 100) 33% 66%, 
+            rgb(100, 0, 100) 66%);
         }
     }
 }
