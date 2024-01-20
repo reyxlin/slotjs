@@ -34,6 +34,9 @@
 //     SYMBOLS_FORTUNE,
 //     SYMBOLS_FOOD,
 // ];
+export const SYMBOLS_CLASSIC = [
+    '🍋', '🍊', '🍉', '🍈', '🍇', '🥝', '🍓', '🍒', '🌟', '🍀', '💎', '🎰'];
+
 
 export const NUMBER_SYMBOLS = [
     '0️⃣', '1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣',
@@ -43,7 +46,7 @@ export const generateNumbers = () => {
     const numbers = [];
     for (let i = 1; i <= 50; i++) {
         const numStr = i.toString().padStart(2, '0');
-        const symbol = numStr.split('').map((n) => NUMBER_SYMBOLS[parseInt(n)]).join('');
+        const symbol = numStr.split('').map((n) => NUMBER_SYMBOLS[parseInt(n, 10)]).join(''); // Added radix parameter
         numbers.push(symbol);
     }
     return numbers;
